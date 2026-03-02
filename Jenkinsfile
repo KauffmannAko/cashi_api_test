@@ -34,7 +34,7 @@ pipeline {
         if (fileExists('artifacts/allure-results')) {
           try {
             allure includeProperties: false, jdk: '', results: [[path: 'artifacts/allure-results']]
-          } catch (Exception ex) {
+          } catch (Throwable ex) {
             echo "Allure plugin not available or failed: ${ex.getMessage()}"
           }
         }
