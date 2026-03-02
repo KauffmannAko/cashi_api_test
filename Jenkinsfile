@@ -21,7 +21,7 @@ pipeline {
 
     stage('Run API Tests') {
       steps {
-        sh 'docker compose run --rm tests'
+        sh 'docker compose --profile manual run --rm tests'
       }
     }
   }
