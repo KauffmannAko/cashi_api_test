@@ -104,20 +104,44 @@ docker compose run --rm tests bash -lc "pip install -r /workspace/tests/requirem
 
 Each test writes request/response logs with a unique correlation ID.
 
-View report from Allure container:
+## View Results in Allure UI
 
-- Base URL: `http://localhost:5050`
-- Latest report endpoint:
-  `http://localhost:5050/allure-docker-service/projects/default/reports/latest/index.html`
-- Trigger generate endpoint:
-  `http://localhost:5050/allure-docker-service/generate-report`
+1. Start required services:
+
+```bash
+docker compose up -d mockserver allure
+```
+
+2. Run tests (this writes results into `./artifacts/allure-results`):
+
+```bash
+docker compose --profile manual run --rm tests
+```
+
+
+3. Open Allure dashboard in browser:
+
+- Latest report: `http://localhost:5050/allure-docker-service/projects/default/reports/latest/index.html`
+
+4. Optional cleanup before a fresh run:
+
+```bash
+rm -rf artifacts/allure-results/* artifacts/allure-reports/*
+```
+
+Troubleshooting commands:
+
+```bash
+docker compose ps
+docker compose logs allure --tail=200
+```
 
 ## Jenkins Local Setup
 
 1. Start Jenkins:
 
 ```bash
-docker compose --profile ci up -d jenkins
+docker compose --profile ci up -d --build jenkins
 ```
 
 2. Open `http://localhost:8080`

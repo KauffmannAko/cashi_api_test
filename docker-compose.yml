@@ -44,7 +44,9 @@ services:
       - ./artifacts/allure-reports:/app/default-reports
 
   jenkins:
-    image: jenkins/jenkins:lts-jdk17
+    build:
+      context: ./jenkins
+    image: cashi-jenkins:lts-docker
     container_name: payments-jenkins
     profiles: ["ci"]
     user: root
