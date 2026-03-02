@@ -1,0 +1,60 @@
+services:
+  mockserver:
+    image: mockserver/mockserver:5.15.0
+    container_name: payments-mockserver
+    ports:
+      - "1080:1080"
+    environment:
+      MOCKSERVER_SERVER_PORT: "1080"
+      MOCKSERVER_INITIALIZATION_JSON_PATH: /config/expectations/transfers_success.json
+    volumes:
+      - ./mockserver/expectations:/config/expectations:ro
+
+  tests:
+    image: python:3.11-slim
+    container_name: payments-tests
+    working_dir: /workspace/tests
+    profiles: ["manual"]
+    depends_on:
+      mockserver:
+        condition: service_started
+    env_file:
+      - .env.dev
+    environment:
+      ENV: ${ENV:-dev}
+      BASE_URL: ${BASE_URL:-http://mockserver:1080}
+      DATASET: ${DATASET:-transfers_dataset.json}
+      PYTHONUNBUFFERED: "1"
+    volumes:
+      - ./tests:/workspace/tests:ro
+      - ./scripts:/workspace/scripts:ro
+      - ./artifacts:/artifacts
+    command: ["/bin/bash", "-lc", "bash /workspace/scripts/run-tests.sh"]
+
+  allure:
+    image: frankescobar/allure-docker-service:latest
+    container_name: payments-allure
+    ports:
+      - "5050:5050"
+    environment:
+      CHECK_RESULTS_EVERY_SECONDS: "2"
+      KEEP_HISTORY: "1"
+    volumes:
+      - ./artifacts/allure-results:/app/allure-results
+      - ./artifacts/allure-reports:/app/default-reports
+
+  jenkins:
+    image: jenkins/jenkins:lts-jdk17
+    container_name: payments-jenkins
+    profiles: ["ci"]
+    user: root
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./:/workspace
+
+volumes:
+  jenkins_home:

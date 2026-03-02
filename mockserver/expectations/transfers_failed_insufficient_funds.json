@@ -1,0 +1,24 @@
+{
+  "httpRequest": {
+    "method": "POST",
+    "path": "/api/v1/transfers",
+    "body": {
+      "type": "JSON",
+      "json": "{\"from_account\":\"ACC9999\",\"currency\":\"USD\",\"description\":\"Insufficient funds test\"}",
+      "matchType": "ONLY_MATCHING_FIELDS"
+    }
+  },
+  "httpResponse": {
+    "statusCode": 402,
+    "headers": {
+      "Content-Type": ["application/json"]
+    },
+    "body": {
+      "transfer_id": "trf_10002",
+      "status": "failed",
+      "exchange_rate": "1.00",
+      "fees": "0.00",
+      "estimated_completion": "2026-02-28T10:35:00Z"
+    }
+  }
+}

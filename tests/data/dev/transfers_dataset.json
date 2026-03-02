@@ -1,0 +1,38 @@
+[
+  {
+    "name": "dev_success_completed_transfer",
+    "payload": {
+      "from_account": "ACC1001",
+      "to_account": "ACC2001",
+      "amount": "49.99",
+      "currency": "USD",
+      "description": "Rent Feb",
+      "scheduled_date": "2026-02-28T09:00:00Z",
+      "recurring": {
+        "enabled": false,
+        "frequency": "monthly",
+        "end_date": "2026-12-31T23:59:59Z"
+      }
+    },
+    "expected_http_status": 201,
+    "expected_status": "completed"
+  },
+  {
+    "name": "dev_failed_insufficient_funds",
+    "payload": {
+      "from_account": "ACC9999",
+      "to_account": "ACC2001",
+      "amount": "50000.00",
+      "currency": "USD",
+      "description": "Insufficient funds test",
+      "scheduled_date": "2026-02-28T09:10:00Z",
+      "recurring": {
+        "enabled": false,
+        "frequency": "monthly",
+        "end_date": "2026-12-31T23:59:59Z"
+      }
+    },
+    "expected_http_status": 402,
+    "expected_status": "failed"
+  }
+]
