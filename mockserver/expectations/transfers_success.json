@@ -19,7 +19,491 @@
         "status": "completed",
         "exchange_rate": "1.00",
         "fees": "0.99",
-        "estimated_completion": "2026-02-28T10:30:00Z"
+        "estimated_completion": "2026-03-02T10:30:00Z"
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/v1/transfers",
+      "body": {
+        "type": "JSON",
+        "json": "{\"from_account\":\"ACC1002\",\"to_account\":\"ACC2001\",\"amount\":\"49.99\",\"currency\":\"USD\",\"description\":\"Groceries\",\"recurring\":{\"enabled\":false}}",
+        "matchType": "ONLY_MATCHING_FIELDS"
+      }
+    },
+    "httpResponse": {
+      "statusCode": 402,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "transfer_id": "trf_10002",
+        "status": "failed",
+        "exchange_rate": "1.00",
+        "fees": "0.00",
+        "estimated_completion": null
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/v1/transfers",
+      "body": {
+        "type": "JSON",
+        "json": "{\"from_account\":\"ACC1001\",\"to_account\":\"ACC9999\",\"amount\":\"20.00\",\"currency\":\"USD\",\"description\":\"Gift\"}",
+        "matchType": "ONLY_MATCHING_FIELDS"
+      }
+    },
+    "httpResponse": {
+      "statusCode": 404,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "transfer_id": "trf_10003",
+        "status": "failed",
+        "exchange_rate": "1.00",
+        "fees": "0.00",
+        "estimated_completion": null
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/v1/transfers",
+      "body": {
+        "type": "JSON",
+        "json": "{\"from_account\":\"ACC9998\",\"to_account\":\"ACC2001\",\"amount\":\"20.00\",\"currency\":\"USD\",\"description\":\"Test\"}",
+        "matchType": "ONLY_MATCHING_FIELDS"
+      }
+    },
+    "httpResponse": {
+      "statusCode": 404,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "transfer_id": "trf_10004",
+        "status": "failed",
+        "exchange_rate": "1.00",
+        "fees": "0.00",
+        "estimated_completion": null
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/v1/transfers",
+      "body": {
+        "type": "JSON",
+        "json": "{\"from_account\":\"ACC1001\",\"to_account\":\"ACC1001\",\"amount\":\"10.00\",\"currency\":\"USD\",\"description\":\"Self transfer\"}",
+        "matchType": "ONLY_MATCHING_FIELDS"
+      }
+    },
+    "httpResponse": {
+      "statusCode": 400,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "transfer_id": "trf_10005",
+        "status": "failed",
+        "exchange_rate": "1.00",
+        "fees": "0.00",
+        "estimated_completion": null
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/v1/transfers",
+      "body": {
+        "type": "JSON",
+        "json": "{\"from_account\":\"ACC3001\",\"to_account\":\"ACC2001\",\"amount\":\"10.00\",\"currency\":\"USD\",\"description\":\"Unauthorized\"}",
+        "matchType": "ONLY_MATCHING_FIELDS"
+      }
+    },
+    "httpResponse": {
+      "statusCode": 403,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "transfer_id": "trf_10006",
+        "status": "failed",
+        "exchange_rate": "1.00",
+        "fees": "0.00",
+        "estimated_completion": null
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/v1/transfers",
+      "body": {
+        "type": "JSON",
+        "json": "{\"from_account\":\"ACC1001\",\"to_account\":\"ACC2001\",\"amount\":\"15.00\",\"currency\":\"USD\",\"description\":\"Lunch\",\"recurring\":{\"enabled\":false}}",
+        "matchType": "ONLY_MATCHING_FIELDS"
+      }
+    },
+    "times": {
+      "remainingTimes": 1,
+      "unlimited": false
+    },
+    "httpResponse": {
+      "statusCode": 201,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "transfer_id": "trf_10007",
+        "status": "completed",
+        "exchange_rate": "1.00",
+        "fees": "0.50",
+        "estimated_completion": "2026-03-02T10:40:00Z"
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/v1/transfers",
+      "body": {
+        "type": "JSON",
+        "json": "{\"from_account\":\"ACC1001\",\"to_account\":\"ACC2001\",\"amount\":\"15.00\",\"currency\":\"USD\",\"description\":\"Lunch\",\"recurring\":{\"enabled\":false}}",
+        "matchType": "ONLY_MATCHING_FIELDS"
+      }
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "transfer_id": "trf_10007",
+        "status": "pending",
+        "exchange_rate": "1.00",
+        "fees": "0.50",
+        "estimated_completion": "2026-03-02T10:40:00Z"
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/v1/transfers",
+      "body": {
+        "type": "JSON",
+        "json": "{\"from_account\":\"ACC1001\",\"to_account\":\"ACC2001\",\"amount\":\"25.00\",\"currency\":\"USD\",\"description\":\"Electricity bill\",\"scheduled_date\":\"2026-03-05T10:00:00Z\",\"recurring\":{\"enabled\":false}}",
+        "matchType": "ONLY_MATCHING_FIELDS"
+      }
+    },
+    "httpResponse": {
+      "statusCode": 201,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "transfer_id": "trf_10008",
+        "status": "pending",
+        "exchange_rate": "1.00",
+        "fees": "0.25",
+        "estimated_completion": "2026-03-05T10:00:00Z"
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/v1/transfers",
+      "body": {
+        "type": "JSON",
+        "json": "{\"description\":\"Past schedule\",\"scheduled_date\":\"2025-01-01T10:00:00Z\"}",
+        "matchType": "ONLY_MATCHING_FIELDS"
+      }
+    },
+    "httpResponse": {
+      "statusCode": 400,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "transfer_id": "trf_10009",
+        "status": "failed",
+        "exchange_rate": "1.00",
+        "fees": "0.00",
+        "estimated_completion": null
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/v1/transfers",
+      "body": {
+        "type": "JSON",
+        "json": "{\"description\":\"Daily savings\",\"scheduled_date\":\"2026-03-01T08:00:00Z\",\"recurring\":{\"enabled\":true,\"frequency\":\"daily\",\"end_date\":\"2026-03-10T08:00:00Z\"}}",
+        "matchType": "ONLY_MATCHING_FIELDS"
+      }
+    },
+    "httpResponse": {
+      "statusCode": 201,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "transfer_id": "trf_10010",
+        "status": "pending",
+        "exchange_rate": "1.00",
+        "fees": "0.05",
+        "estimated_completion": "2026-03-01T08:00:00Z"
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/v1/transfers",
+      "body": {
+        "type": "JSON",
+        "json": "{\"description\":\"Recurring missing end\",\"recurring\":{\"enabled\":true,\"frequency\":\"weekly\"}}",
+        "matchType": "ONLY_MATCHING_FIELDS"
+      }
+    },
+    "httpResponse": {
+      "statusCode": 400,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "transfer_id": "trf_10011",
+        "status": "failed",
+        "exchange_rate": "1.00",
+        "fees": "0.00",
+        "estimated_completion": null
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/v1/transfers",
+      "body": {
+        "type": "JSON",
+        "json": "{\"description\":\"Recurring wrong end\",\"scheduled_date\":\"2026-03-10T08:00:00Z\",\"recurring\":{\"enabled\":true,\"frequency\":\"monthly\",\"end_date\":\"2026-03-01T08:00:00Z\"}}",
+        "matchType": "ONLY_MATCHING_FIELDS"
+      }
+    },
+    "httpResponse": {
+      "statusCode": 400,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "transfer_id": "trf_10012",
+        "status": "failed",
+        "exchange_rate": "1.00",
+        "fees": "0.00",
+        "estimated_completion": null
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/v1/transfers",
+      "body": {
+        "type": "JSON",
+        "json": "{\"description\":\"Recurring invalid frequency\",\"recurring\":{\"enabled\":true,\"frequency\":\"yearly\",\"end_date\":\"2026-04-01T08:00:00Z\"}}",
+        "matchType": "ONLY_MATCHING_FIELDS"
+      }
+    },
+    "httpResponse": {
+      "statusCode": 400,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "transfer_id": "trf_10013",
+        "status": "failed",
+        "exchange_rate": "1.00",
+        "fees": "0.00",
+        "estimated_completion": null
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/v1/transfers",
+      "body": {
+        "type": "JSON",
+        "json": "{\"from_account\":\"ACCXAF01\",\"to_account\":\"ACCUSD01\",\"amount\":\"100.00\",\"currency\":\"USD\",\"description\":\"USD purchase\"}",
+        "matchType": "ONLY_MATCHING_FIELDS"
+      }
+    },
+    "httpResponse": {
+      "statusCode": 201,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "transfer_id": "trf_10014",
+        "status": "completed",
+        "exchange_rate": "0.0016",
+        "fees": "1.25",
+        "estimated_completion": "2026-03-02T11:00:00Z"
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/v1/transfers",
+      "body": {
+        "type": "JSON",
+        "json": "{\"from_account\":\"ACCXAF01\",\"to_account\":\"ACCUSD01\",\"amount\":\"100.00\",\"currency\":\"USD\",\"description\":\"FX unavailable\"}",
+        "matchType": "ONLY_MATCHING_FIELDS"
+      }
+    },
+    "httpResponse": {
+      "statusCode": 503,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "transfer_id": "trf_10015",
+        "status": "failed",
+        "exchange_rate": "",
+        "fees": "0.00",
+        "estimated_completion": null
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/v1/transfers",
+      "body": {
+        "type": "JSON",
+        "json": "{\"from_account\":\"ACC1001\",\"to_account\":\"ACC2001\",\"amount\":\"1500.00\",\"currency\":\"USD\",\"description\":\"Large payment\"}",
+        "matchType": "ONLY_MATCHING_FIELDS"
+      }
+    },
+    "httpResponse": {
+      "statusCode": 422,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "transfer_id": "trf_10016",
+        "status": "failed",
+        "exchange_rate": "1.00",
+        "fees": "0.00",
+        "estimated_completion": null
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/v1/transfers",
+      "body": {
+        "type": "JSON",
+        "json": "{\"from_account\":\"ACC1001\",\"to_account\":\"ACC2001\",\"amount\":\"150.00\",\"currency\":\"USD\",\"description\":\"Daily limit step 1\"}",
+        "matchType": "ONLY_MATCHING_FIELDS"
+      }
+    },
+    "httpResponse": {
+      "statusCode": 201,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "transfer_id": "trf_10017",
+        "status": "completed",
+        "exchange_rate": "1.00",
+        "fees": "0.40",
+        "estimated_completion": "2026-03-02T11:05:00Z"
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/v1/transfers",
+      "body": {
+        "type": "JSON",
+        "json": "{\"from_account\":\"ACC1001\",\"to_account\":\"ACC2001\",\"amount\":\"60.00\",\"currency\":\"USD\",\"description\":\"Daily limit step 2\"}",
+        "matchType": "ONLY_MATCHING_FIELDS"
+      }
+    },
+    "httpResponse": {
+      "statusCode": 429,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "transfer_id": "trf_10018",
+        "status": "failed",
+        "exchange_rate": "1.00",
+        "fees": "0.00",
+        "estimated_completion": null
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/v1/transfers",
+      "body": {
+        "type": "JSON",
+        "json": "{\"amount\":\"0.00\",\"description\":\"Invalid amount zero\"}",
+        "matchType": "ONLY_MATCHING_FIELDS"
+      }
+    },
+    "httpResponse": {
+      "statusCode": 400,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "transfer_id": "trf_10019",
+        "status": "failed",
+        "exchange_rate": "1.00",
+        "fees": "0.00",
+        "estimated_completion": null
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/v1/transfers",
+      "body": {
+        "type": "JSON",
+        "json": "{\"amount\":\"-10.00\",\"description\":\"Invalid amount negative\"}",
+        "matchType": "ONLY_MATCHING_FIELDS"
+      }
+    },
+    "httpResponse": {
+      "statusCode": 400,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "transfer_id": "trf_10020",
+        "status": "failed",
+        "exchange_rate": "1.00",
+        "fees": "0.00",
+        "estimated_completion": null
       }
     }
   },
@@ -39,11 +523,11 @@
         "Content-Type": ["application/json"]
       },
       "body": {
-        "transfer_id": "trf_10002",
+        "transfer_id": "trf_legacy_10021",
         "status": "failed",
         "exchange_rate": "1.00",
         "fees": "0.00",
-        "estimated_completion": "2026-02-28T10:35:00Z"
+        "estimated_completion": null
       }
     }
   }
