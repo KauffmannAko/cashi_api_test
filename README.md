@@ -117,7 +117,7 @@ View report from Allure container:
 1. Start Jenkins:
 
 ```bash
-docker compose --profile ci up -d jenkins
+docker compose --profile ci up -d --build jenkins
 ```
 
 2. Open `http://localhost:8080`
