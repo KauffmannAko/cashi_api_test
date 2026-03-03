@@ -4,7 +4,7 @@ API test framework for `POST /api/v1/transfers` using Python + pytest + Allure +
 
 ## Stack
 
-- Test framework: `pytest`, `pytest-xdist`, `allure-pytest`
+- Test framework: `pytest`, `pytest-xdist`, `allure-pytest`, `Locust(for performance testing)` 
 - Runtime: Docker + Docker Compose
 - Mocking: MockServer
 - Reporting: Allure Docker Service
