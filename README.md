@@ -210,4 +210,4 @@ docker compose run --rm tests
 docker compose down -v
 ```
 ## Allure Resut
-<img width="1906" height="913" alt="Screenshot from 2026-03-02 02-32-29" src="https://github.com/user-attachments/assets/ef789207-75bd-4325-944d-d45808abc8f4" />
+<img width="1902" height="927" alt="image" src="https://github.com/user-attachments/assets/04a56b33-58dd-45ec-8f27-f54831306b9c" />
