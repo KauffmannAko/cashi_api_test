@@ -69,6 +69,7 @@ services:
   allure:
     image: frankescobar/allure-docker-service:latest
     container_name: payments-allure
+    user: "0:0"
     ports:
       - "5050:5050"
     environment:
