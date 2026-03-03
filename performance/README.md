@@ -43,7 +43,7 @@ performance/
 
 Each request is executed using `catch_response=True` and marked failed when any condition is not met:
 
-- HTTP status must be `200`.
+- HTTP status must be `200` or `201`.
 - Response JSON must contain `transfer_id`.
 - Request response time must be below `RESPONSE_TIME_THRESHOLD_MS` (default: `2000`).
 

@@ -1,13 +1,11 @@
 {
   "accounts": [
-    "ACC100001",
-    "ACC100002",
-    "ACC100003",
-    "ACC100004",
-    "ACC100005",
-    "ACC100006",
-    "ACC100007",
-    "ACC100008"
+    "ACC1001",
+    "ACC1002",
+    "ACC2001",
+    "ACC3001",
+    "ACCXAF01",
+    "ACCUSD01"
   ],
   "currencies": [
     "USD",

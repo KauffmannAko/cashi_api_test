@@ -530,5 +530,25 @@
         "estimated_completion": null
       }
     }
+  },
+  {
+    "priority": -10,
+    "httpRequest": {
+      "method": "POST",
+      "path": "/api/v1/transfers"
+    },
+    "httpResponse": {
+      "statusCode": 201,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": {
+        "transfer_id": "trf_perf_default",
+        "status": "completed",
+        "exchange_rate": "1.00",
+        "fees": "0.10",
+        "estimated_completion": "2026-03-03T10:00:00Z"
+      }
+    }
   }
 ]
