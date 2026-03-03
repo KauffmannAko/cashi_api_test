@@ -160,7 +160,7 @@ class TransferUser(HttpUser):
             catch_response=True,
             context={"correlation_id": correlation_id, "scenario": scenario_name},
         ) as response:
-            if response.status_code != 200:
+            if response.status_code not in (200, 201):
                 response.failure(f"Unexpected status code: {response.status_code}")
                 return
 
