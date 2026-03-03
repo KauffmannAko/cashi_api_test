@@ -1,6 +1,6 @@
 # Payments API Test Automation (Dockerized)
 
-API test framework for `POST /api/v1/transfers` using Python + pytest + Allure + Jenkins + MockServer.
+API test framework for `POST /api/v1/transfers` using Python + pytest + Allure + Jenkins + MockServer + locust(for performance testing).
 
 ## Stack
 
@@ -25,6 +25,13 @@ API test framework for `POST /api/v1/transfers` using Python + pytest + Allure +
 │   │   ├── transfers_success.json
 │   │   └── transfers_failed_insufficient_funds.json
 │   └── init.sh
+├── performance
+│   ├── locustfile.py
+│   ├── Dockerfile
+│   ├── requirements.txt
+│   ├── test_data.json
+│   ├── README.md
+│   └── jenkins-stage-snippet.groovy
 ├── tests
 │   ├── requirements.txt
 │   ├── pytest.ini
@@ -101,6 +108,7 @@ docker compose run --rm tests bash -lc "pip install -r /workspace/tests/requirem
 
 - Allure results: `./artifacts/allure-results`
 - Logs: `./artifacts/logs`
+- Performance results (Locust CSV): `./artifacts/performance`
 
 Each test writes request/response logs with a unique correlation ID.
 
@@ -161,6 +169,30 @@ Pipeline stages:
 - Archive artifacts (`artifacts/**/*`)
 - Publish Allure results if plugin is available
 
+## Performance Testing (Locust)
+
+Performance assets are under `./performance` and run via a profile-gated `locust` service, so existing API test commands are unaffected.
+
+Local UI mode:
+
+```bash
+docker compose --profile performance up --build locust
+```
+
+Headless mode (CI style):
+
+```bash
+docker compose --profile performance run --rm \
+  -e HEADLESS=true \
+  -e USERS=10000 \
+  -e SPAWN_RATE=500 \
+  -e RUN_TIME=5m \
+  -e BASE_URL=http://mockserver:1080 \
+  locust
+```
+
+See `performance/README.md` for full test strategy, SLA thresholds, distributed mode, and Jenkins stage snippet.
+
 ## Add a New Test
 
 1. Add or extend expectations under `mockserver/expectations`.
@@ -179,4 +211,3 @@ docker compose down -v
 ```
 ## Allure Resut
 <img width="1906" height="913" alt="Screenshot from 2026-03-02 02-32-29" src="https://github.com/user-attachments/assets/ef789207-75bd-4325-944d-d45808abc8f4" />
-

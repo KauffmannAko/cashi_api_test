@@ -31,6 +31,41 @@ services:
       - ./artifacts:/artifacts
     command: ["/bin/bash", "-lc", "bash /workspace/scripts/run-tests.sh"]
 
+  locust:
+    build:
+      context: ./performance
+    image: cashi-locust:latest
+    container_name: payments-locust
+    profiles: ["performance"]
+    working_dir: /workspace/performance
+    depends_on:
+      mockserver:
+        condition: service_started
+    environment:
+      BASE_URL: ${BASE_URL:-http://mockserver:1080}
+      AUTH_TOKEN: ${AUTH_TOKEN:-}
+      HEADLESS: ${HEADLESS:-false}
+      USERS: ${USERS:-1000}
+      SPAWN_RATE: ${SPAWN_RATE:-100}
+      RUN_TIME: ${RUN_TIME:-5m}
+      RESPONSE_TIME_THRESHOLD_MS: ${RESPONSE_TIME_THRESHOLD_MS:-2000}
+      P95_THRESHOLD_MS: ${P95_THRESHOLD_MS:-2000}
+      FAILURE_RATE_THRESHOLD: ${FAILURE_RATE_THRESHOLD:-0.01}
+      TRANSFER_PATH: ${TRANSFER_PATH:-/api/v1/transfers}
+      TEST_DATA_FILE: ${TEST_DATA_FILE:-test_data.json}
+      PYTHONUNBUFFERED: "1"
+    volumes:
+      - ./performance:/workspace/performance:ro
+      - ./artifacts:/artifacts
+    ports:
+      - "8089:8089"
+    command:
+      [
+        "/bin/bash",
+        "-lc",
+        "mkdir -p /artifacts/performance && if [ \"$${HEADLESS}\" = \"true\" ]; then locust -f locustfile.py --host=$${BASE_URL} --headless -u $${USERS} -r $${SPAWN_RATE} --run-time $${RUN_TIME} --csv=/artifacts/performance/locust --csv-full-history; else locust -f locustfile.py --host=$${BASE_URL}; fi",
+      ]
+
   allure:
     image: frankescobar/allure-docker-service:latest
     container_name: payments-allure

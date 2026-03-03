@@ -1,0 +1,23 @@
+{
+  "accounts": [
+    "ACC100001",
+    "ACC100002",
+    "ACC100003",
+    "ACC100004",
+    "ACC100005",
+    "ACC100006",
+    "ACC100007",
+    "ACC100008"
+  ],
+  "currencies": [
+    "USD",
+    "EUR",
+    "NGN"
+  ],
+  "descriptions": [
+    "Vendor settlement",
+    "Salary disbursement",
+    "Wallet topup",
+    "Bill payment"
+  ]
+}
